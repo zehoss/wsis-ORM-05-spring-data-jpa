@@ -1,0 +1,1 @@
+# wsis-ORM-05-spring-data-jpa
