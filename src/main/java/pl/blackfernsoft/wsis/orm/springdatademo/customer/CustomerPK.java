@@ -1,4 +1,4 @@
-package pl.blackfernsoft.wsis.orm.springdatademo.entity;
+package pl.blackfernsoft.wsis.orm.springdatademo.customer;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;

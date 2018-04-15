@@ -1,4 +1,4 @@
-package pl.blackfernsoft.wsis.orm.springdatademo.entity;
+package pl.blackfernsoft.wsis.orm.springdatademo.vehicles.entity;
 
 
 import pl.blackfernsoft.wsis.orm.springdatademo.enums.Color;

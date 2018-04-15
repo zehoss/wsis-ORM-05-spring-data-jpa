@@ -1,5 +1,8 @@
-package pl.blackfernsoft.wsis.orm.springdatademo.entity;
+package pl.blackfernsoft.wsis.orm.springdatademo.customer;
 
+
+import pl.blackfernsoft.wsis.orm.springdatademo.common.Address;
+import pl.blackfernsoft.wsis.orm.springdatademo.vehicles.entity.Vehicle;
 
 import javax.persistence.*;
 import java.util.ArrayList;

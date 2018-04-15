@@ -1,7 +1,8 @@
-package pl.blackfernsoft.wsis.orm.springdatademo.car;
+package pl.blackfernsoft.wsis.orm.springdatademo.vehicles;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.blackfernsoft.wsis.orm.springdatademo.vehicles.entity.Car;
 
 import java.util.List;
 

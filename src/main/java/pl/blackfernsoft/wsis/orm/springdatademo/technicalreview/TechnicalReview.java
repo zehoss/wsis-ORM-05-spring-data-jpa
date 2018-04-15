@@ -1,4 +1,4 @@
-package pl.blackfernsoft.wsis.orm.springdatademo.car;
+package pl.blackfernsoft.wsis.orm.springdatademo.technicalreview;
 
 import pl.blackfernsoft.wsis.orm.springdatademo.enums.TechnicalReviewResultEnum;
 
@@ -23,7 +23,7 @@ public class TechnicalReview {
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "CAR_ID")
-//    private Car car;
+//    private Car vehicles;
 
     // getters and setters
 
@@ -60,11 +60,11 @@ public class TechnicalReview {
     }
 
 //    public Car getCar() {
-//        return car;
+//        return vehicles;
 //    }
 //
-//    public void setCar(Car car) {
-//        this.car = car;
+//    public void setCar(Car vehicles) {
+//        this.vehicles = vehicles;
 //    }
 
     @Override

@@ -1,9 +1,9 @@
-package pl.blackfernsoft.wsis.orm.springdatademo.car;
+package pl.blackfernsoft.wsis.orm.springdatademo.vehicles.entity;
 
-import pl.blackfernsoft.wsis.orm.springdatademo.entity.Address;
-import pl.blackfernsoft.wsis.orm.springdatademo.entity.Customer;
-import pl.blackfernsoft.wsis.orm.springdatademo.entity.Vehicle;
+import pl.blackfernsoft.wsis.orm.springdatademo.common.Address;
+import pl.blackfernsoft.wsis.orm.springdatademo.customer.Customer;
 import pl.blackfernsoft.wsis.orm.springdatademo.enums.CarType;
+import pl.blackfernsoft.wsis.orm.springdatademo.technicalreview.TechnicalReview;
 
 import javax.persistence.*;
 import java.util.*;

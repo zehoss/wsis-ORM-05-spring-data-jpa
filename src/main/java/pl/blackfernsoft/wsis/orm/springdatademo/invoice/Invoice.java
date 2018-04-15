@@ -1,4 +1,6 @@
-package pl.blackfernsoft.wsis.orm.springdatademo.entity;
+package pl.blackfernsoft.wsis.orm.springdatademo.invoice;
+
+import pl.blackfernsoft.wsis.orm.springdatademo.rental.Rental;
 
 import javax.persistence.*;
 import java.util.Date;
