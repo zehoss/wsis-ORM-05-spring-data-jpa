@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+import pl.blackfernsoft.wsis.orm.springdatademo.common.exceptions.TechnicalReviewNotFoundException;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("technical-reviews")
@@ -17,6 +19,15 @@ public class TechnicalReviewController {
     @GetMapping("")
     public Page<TechnicalReview> findAll(Pageable pageable) {
         return technicalReviewRepository.findAll(pageable);
+    }
+
+    @GetMapping("{id}")
+    public TechnicalReview findById(@PathVariable(name = "id") Long technicalReviewId) {
+        Optional<TechnicalReview> technicalReview = this.technicalReviewRepository.findById(technicalReviewId);
+        if (!technicalReview.isPresent()) {
+            throw new TechnicalReviewNotFoundException("Nie znaleziono przeglądu o podanym id", technicalReviewId);
+        }
+        return technicalReview.get();
     }
 
     @PostMapping("")

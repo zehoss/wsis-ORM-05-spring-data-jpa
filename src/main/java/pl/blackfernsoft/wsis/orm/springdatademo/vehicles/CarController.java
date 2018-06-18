@@ -23,6 +23,15 @@ public class CarController {
         return carRepository.findAll(pageable);
     }
 
+    @GetMapping("{carId}")
+    public Car findById(@PathVariable(name = "carId") Long carId) {
+        Optional<Car> car = this.carRepository.findById(carId);
+        if (!car.isPresent()) {
+            throw new CarNotFoundException("Nie znaleziono pojazdu o podanym id", carId);
+        }
+        return car.get();
+    }
+
     @PostMapping("")
     public Car create(@RequestBody @Valid Car car) {
         return carRepository.save(car);
