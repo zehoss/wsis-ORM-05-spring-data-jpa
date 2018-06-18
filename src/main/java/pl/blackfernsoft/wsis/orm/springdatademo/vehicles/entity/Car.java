@@ -1,12 +1,14 @@
 package pl.blackfernsoft.wsis.orm.springdatademo.vehicles.entity;
 
 import pl.blackfernsoft.wsis.orm.springdatademo.common.Address;
+import pl.blackfernsoft.wsis.orm.springdatademo.common.enums.CarType;
 import pl.blackfernsoft.wsis.orm.springdatademo.customer.Customer;
-import pl.blackfernsoft.wsis.orm.springdatademo.enums.CarType;
-import pl.blackfernsoft.wsis.orm.springdatademo.technicalreview.TechnicalReview;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 // Can't set @Table if inheritance strategy is SINGLE_TABLE
@@ -30,10 +32,6 @@ public class Car extends Vehicle {
     @CollectionTable(name = "RENTAL_DATES", joinColumns = @JoinColumn(name = "CAR_ID"))
     @Column(name = "RENTAL_DATES")
     private Collection<Date> rentalDates = new ArrayList<>();
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "CAR_ID")
-    private Set<TechnicalReview> technicalReview = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "vehicles")
     private List<Customer> customers = new ArrayList<>();
@@ -71,14 +69,6 @@ public class Car extends Vehicle {
         this.rentalDates = rentalDates;
     }
 
-    public Set<TechnicalReview> getTechnicalReview() {
-        return technicalReview;
-    }
-
-    public void setTechnicalReview(Set<TechnicalReview> technicalReview) {
-        this.technicalReview = technicalReview;
-    }
-
     public List<Customer> getCustomers() {
         return customers;
     }
@@ -94,7 +84,6 @@ public class Car extends Vehicle {
                 ", carType=" + carType +
                 ", rentalAddress=" + rentalAddress +
                 ", rentalDates=" + rentalDates +
-                ", technicalReview=" + technicalReview +
                 "} " + super.toString();
     }
 }

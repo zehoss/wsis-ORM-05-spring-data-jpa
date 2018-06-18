@@ -1,42 +1,47 @@
 package pl.blackfernsoft.wsis.orm.springdatademo.vehicles;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+import pl.blackfernsoft.wsis.orm.springdatademo.common.exceptions.CarNotFoundException;
+import pl.blackfernsoft.wsis.orm.springdatademo.technicalreview.TechnicalReview;
 import pl.blackfernsoft.wsis.orm.springdatademo.vehicles.entity.Car;
 
-import java.util.List;
+import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/car")
+@RequestMapping("/cars")
 public class CarController {
 
     @Autowired
-    CarRepository carRepository;
+    private CarRepository carRepository;
 
     @GetMapping("")
-    public List<Car> getCarList() {
-        return carRepository.findAll();
+    public Page<Car> findAll(Pageable pageable) {
+        return carRepository.findAll(pageable);
     }
 
     @PostMapping("")
-    public Car createCar(/*should get some parameters from POST request*/) {
-        Car car = new Car();
-        car.setName("Fiat");
-
+    public Car create(@RequestBody @Valid Car car) {
         return carRepository.save(car);
     }
 
-    /**
-     * Warning - creating object using GET request method is not a good practice!
-     * This is just an example.
-     */
-    @GetMapping("/createCar")
-    public Car createCarGet(@RequestParam("name") String name, @RequestParam("plates") String plates) {
-        Car car = new Car();
-        car.setName(name);
-        car.setPlatesNumber(plates);
-
-        return carRepository.save(car);
+    @DeleteMapping("")
+    public void delete(@RequestBody Car car) {
+        carRepository.delete(car);
     }
 
+    @PostMapping("{carId}/technical-review")
+    public Car addTechnicalReview(@PathVariable(name = "carId") Long carId, @RequestBody TechnicalReview technicalReview) {
+        Optional<Car> car = carRepository.findById(carId);
+        if (!car.isPresent()) {
+            throw new CarNotFoundException("Nie znaleziono pojazdu o podanym id", carId);
+        }
+
+        car.get().getTechnicalReview().add(technicalReview);
+        technicalReview.setVehicle(car.get());
+        return carRepository.save(car.get());
+    }
 }

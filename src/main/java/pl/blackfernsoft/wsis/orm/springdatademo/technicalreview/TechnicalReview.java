@@ -1,6 +1,7 @@
 package pl.blackfernsoft.wsis.orm.springdatademo.technicalreview;
 
-import pl.blackfernsoft.wsis.orm.springdatademo.enums.TechnicalReviewResultEnum;
+import pl.blackfernsoft.wsis.orm.springdatademo.common.enums.TechnicalReviewResultEnum;
+import pl.blackfernsoft.wsis.orm.springdatademo.vehicles.entity.Vehicle;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,11 +22,8 @@ public class TechnicalReview {
     @Enumerated(EnumType.STRING)
     private TechnicalReviewResultEnum result;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "CAR_ID")
-//    private Car vehicles;
-
-    // getters and setters
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Vehicle vehicle;
 
     public Long getId() {
         return id;
@@ -59,13 +57,13 @@ public class TechnicalReview {
         this.result = result;
     }
 
-//    public Car getCar() {
-//        return vehicles;
-//    }
-//
-//    public void setCar(Car vehicles) {
-//        this.vehicles = vehicles;
-//    }
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
 
     @Override
     public String toString() {
@@ -74,6 +72,7 @@ public class TechnicalReview {
                 ", date=" + date +
                 ", nextReview=" + nextReview +
                 ", result=" + result +
+                ", vehicle=" + vehicle +
                 '}';
     }
 }

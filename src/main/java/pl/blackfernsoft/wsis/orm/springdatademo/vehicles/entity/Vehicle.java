@@ -1,10 +1,13 @@
 package pl.blackfernsoft.wsis.orm.springdatademo.vehicles.entity;
 
 
-import pl.blackfernsoft.wsis.orm.springdatademo.enums.Color;
+import pl.blackfernsoft.wsis.orm.springdatademo.common.enums.Color;
+import pl.blackfernsoft.wsis.orm.springdatademo.technicalreview.TechnicalReview;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 //@MappedSuperclass
@@ -20,8 +23,6 @@ public abstract class Vehicle {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    // other fields, getters and setters
-
     @Column(name = "PLATES_NUMBER")
     private String platesNumber;
 
@@ -30,6 +31,10 @@ public abstract class Vehicle {
 
     @Enumerated(EnumType.STRING)
     private Color color;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "CAR_ID")
+    private Set<TechnicalReview> technicalReview = new HashSet<>();
 
     // Getters and setters
 
@@ -71,6 +76,14 @@ public abstract class Vehicle {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public Set<TechnicalReview> getTechnicalReview() {
+        return technicalReview;
+    }
+
+    public void setTechnicalReview(Set<TechnicalReview> technicalReview) {
+        this.technicalReview = technicalReview;
     }
 
     @Override

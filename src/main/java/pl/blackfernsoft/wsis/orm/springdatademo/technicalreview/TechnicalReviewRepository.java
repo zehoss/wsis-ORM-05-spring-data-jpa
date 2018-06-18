@@ -1,6 +1,7 @@
 package pl.blackfernsoft.wsis.orm.springdatademo.technicalreview;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface TechnicalReviewRepository extends JpaRepository<TechnicalReview, Long> {
+public interface TechnicalReviewRepository extends PagingAndSortingRepository<TechnicalReview, Long> {
+
 }
