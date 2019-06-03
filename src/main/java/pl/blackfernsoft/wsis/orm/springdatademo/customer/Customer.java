@@ -25,6 +25,17 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Transient
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATED_AT", nullable = false, updatable = false)
     private Date creationDate = new Date();

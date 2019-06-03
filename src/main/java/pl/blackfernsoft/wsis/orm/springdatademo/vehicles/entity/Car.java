@@ -3,6 +3,7 @@ package pl.blackfernsoft.wsis.orm.springdatademo.vehicles.entity;
 import pl.blackfernsoft.wsis.orm.springdatademo.common.Address;
 import pl.blackfernsoft.wsis.orm.springdatademo.common.enums.CarType;
 import pl.blackfernsoft.wsis.orm.springdatademo.customer.Customer;
+import pl.blackfernsoft.wsis.orm.springdatademo.vehicles.CarDto;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -35,6 +36,12 @@ public class Car extends Vehicle {
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "vehicles")
     private List<Customer> customers = new ArrayList<>();
+
+    public static Car of(CarDto car) {
+        Car newCar = new Car();
+        newCar.setName(car.getName());
+        return newCar;
+    }
 
 
     public Integer getNumberOfSeats() {

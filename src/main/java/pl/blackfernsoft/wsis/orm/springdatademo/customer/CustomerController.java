@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import pl.blackfernsoft.wsis.orm.springdatademo.common.exceptions.CustomerNotFoundException;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -18,7 +17,8 @@ public class CustomerController {
 
     @GetMapping("")
     public Page<Customer> findAll(Pageable pageable) {
-        return customerRepository.findAll(pageable);
+        Page<Customer> all = customerRepository.findAll(pageable);
+        return all;
     }
 
     @GetMapping("{id}")
@@ -31,7 +31,7 @@ public class CustomerController {
     }
 
     @PostMapping("")
-    public Customer create(@RequestBody @Valid Customer customer) {
+    public Customer create(@RequestBody Customer customer) {
         return customerRepository.save(customer);
     }
 

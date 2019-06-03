@@ -16,15 +16,15 @@ import java.util.Optional;
 public class CarController {
 
     @Autowired
-    private CarRepository carRepository;
+    private CarService carService;
 
     @GetMapping("")
     public Page<Car> findAll(Pageable pageable) {
-        return carRepository.findAll(pageable);
+        return carService.findAll(pageable);
     }
 
     @GetMapping("{carId}")
-    public Car findById(@PathVariable(name = "carId") Long carId) {
+    public CarDto findById(@PathVariable(name = "carId") Long carId) {
         Optional<Car> car = this.carRepository.findById(carId);
         if (!car.isPresent()) {
             throw new CarNotFoundException("Nie znaleziono pojazdu o podanym id", carId);
@@ -33,8 +33,8 @@ public class CarController {
     }
 
     @PostMapping("")
-    public Car create(@RequestBody @Valid Car car) {
-        return carRepository.save(car);
+    public Car create(@RequestBody @Valid CarDto car) {
+        return carService.save(car);
     }
 
     @DeleteMapping("")
@@ -44,13 +44,6 @@ public class CarController {
 
     @PostMapping("{carId}/technical-review")
     public Car addTechnicalReview(@PathVariable(name = "carId") Long carId, @RequestBody TechnicalReview technicalReview) {
-        Optional<Car> car = carRepository.findById(carId);
-        if (!car.isPresent()) {
-            throw new CarNotFoundException("Nie znaleziono pojazdu o podanym id", carId);
-        }
-
-        car.get().getTechnicalReview().add(technicalReview);
-        technicalReview.setVehicle(car.get());
-        return carRepository.save(car.get());
+        return carService.addTechnicalReview(carId, technicalReview);
     }
 }
