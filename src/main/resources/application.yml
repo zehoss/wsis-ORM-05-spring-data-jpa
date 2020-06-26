@@ -1,8 +1,7 @@
-#server:
-#  port: 8080
-#  servlet:
-#    context-path: /rental
-
+server:
+  port: 8080
+  servlet:
+    context-path: /rental
 
 # Datasource
 spring:
@@ -18,7 +17,7 @@ spring:
     properties:
       hibernate:
         format_sql: false
-  #enable console on http://localhost:8080/h2-console/
+  #enables console on http://localhost:8080/h2-console/
   h2:
     console:
       enabled: true

@@ -9,6 +9,7 @@ import pl.blackfernsoft.wsis.orm.springdatademo.domain.technicalreview.Technical
 import pl.blackfernsoft.wsis.orm.springdatademo.domain.vehicles.entity.Car;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -21,6 +22,13 @@ public class CarController {
     @GetMapping("")
     public Page<Car> findAll(Pageable pageable) {
         return carRepository.findAll(pageable);
+    }
+
+    // This is a simplified endpoint which just returns a plain list of cars
+    // - this is not a good practice for returning lists in restapi without using pagination by default!
+    @GetMapping("list")
+    public List<Car> findAll() {
+        return carRepository.findAll();
     }
 
     @GetMapping("{carId}")
