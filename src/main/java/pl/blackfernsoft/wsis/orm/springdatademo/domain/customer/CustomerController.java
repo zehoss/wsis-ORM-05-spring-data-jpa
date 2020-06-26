@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.blackfernsoft.wsis.orm.springdatademo.domain.common.exceptions.CustomerNotFoundException;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/customers")
@@ -23,11 +22,8 @@ public class CustomerController {
 
     @GetMapping("{id}")
     public Customer findById(@PathVariable(name = "id") Long id) {
-        Optional<Customer> customer = this.customerRepository.findById(id);
-        if (!customer.isPresent()) {
-            throw new CustomerNotFoundException("Nie znaleziono klienta o podanym id", id);
-        }
-        return customer.get();
+        return this.customerRepository.findById(id)
+                .orElseThrow(() -> new CustomerNotFoundException("Nie znaleziono klienta o podanym id", id));
     }
 
     @PostMapping("")

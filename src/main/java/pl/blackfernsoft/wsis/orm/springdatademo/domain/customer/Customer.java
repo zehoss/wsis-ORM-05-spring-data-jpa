@@ -25,6 +25,9 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String firstName;
+    private String lastName;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATED_AT", nullable = false, updatable = false)
     private Date creationDate = new Date();
@@ -37,6 +40,22 @@ public class Customer {
             joinColumns = @JoinColumn(name = "CUSTOMER_ID"),
             inverseJoinColumns = @JoinColumn(name = "VEHICLE_ID"))
     private List<Vehicle> vehicles = new ArrayList<>();
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public Date getCreationDate() {
         return creationDate;
@@ -74,6 +93,8 @@ public class Customer {
     public String toString() {
         return "Customer{" +
                 "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", creationDate=" + creationDate +
                 ", address=" + address +
                 ", vehicles=" + vehicles +
